@@ -30,11 +30,11 @@
 #define appconfINFERENCE_FRAMES_PER_INFERENCE   200
 
 #ifndef appconfINFERENCE_ENABLED
-#define appconfINFERENCE_ENABLED   1
+#define appconfINFERENCE_ENABLED   0
 #endif
 
 #ifndef appconfI2S_ENABLED
-#define appconfI2S_ENABLED   0
+#define appconfI2S_ENABLED   1
 #endif
 
 #ifndef appconfI2S_AUDIO_SAMPLE_RATE

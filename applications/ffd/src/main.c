@@ -83,12 +83,19 @@ void audio_pipeline_input(void *input_app_data,
 #endif
 }
 
+#include <xcore/hwtimer.h>
+static uint32_t last_time = 0;
+
 int audio_pipeline_output(void *output_app_data,
                           int32_t **output_audio_frames,
                           size_t ch_count,
                           size_t frame_count)
 {
     (void) output_app_data;
+
+    uint32_t now = get_reference_time();
+    // rtos_printf("ref time is %d, diff %d\n", now, now-last_time);
+    last_time = now;
 
 #if appconfI2S_ENABLED
     /* I2S expects sample channel format */
@@ -129,11 +136,12 @@ void vApplicationMallocFailedHook(void)
 static void mem_analysis(void)
 {
 	for (;;) {
-		// rtos_printf("Tile[%d]:\n\tMinimum heap free: %d\n\tCurrent heap free: %d\n", THIS_XCORE_TILE, xPortGetMinimumEverFreeHeapSize(), xPortGetFreeHeapSize());
+		rtos_printf("Tile[%d]:\n\tMinimum heap free: %d\n\tCurrent heap free: %d\n", THIS_XCORE_TILE, xPortGetMinimumEverFreeHeapSize(), xPortGetFreeHeapSize());
 		vTaskDelay(pdMS_TO_TICKS(5000));
 	}
 }
 
+#include "xcore_clock_control.h"
 void startup_task(void *arg)
 {
     rtos_printf("Startup task running from tile %d on core %d\n", THIS_XCORE_TILE, portGET_CORE_ID());
@@ -157,6 +165,32 @@ void startup_task(void *arg)
 
 #if ON_TILE(AUDIO_PIPELINE_TILE_NO)
     audio_pipeline_init(NULL, NULL);
+#endif
+
+#if ON_TILE(0)
+    rtos_printf("switch ref is %d\n", get_local_node_switch_clk_div());
+    // set_local_node_switch_clk_div(255);
+
+    set_tile_processor_clk_div(get_local_tile_id(), 600);
+    rtos_printf("tile[%d] clock rate %d\n", THIS_XCORE_TILE, get_local_tile_processor_clock());
+    rtos_printf("ref is %d\n", get_local_ref_clock());
+
+
+    while(1){
+        vTaskDelay(pdMS_TO_TICKS(1000));
+        rtos_printf("1s\n");
+    }
+#endif
+
+#if ON_TILE(1)
+    // set_tile_processor_clk_div(get_local_tile_id(), 2); // 600/2 = 300
+    // set_tile_processor_clk_div(get_local_tile_id(), 3); // 600/3 = 200 // lowest i2s functions
+    set_tile_processor_clk_div(get_local_tile_id(), 5); // 600/5 = 120
+    // set_tile_processor_clk_div(get_local_tile_id(), 6); // 600/6 = 100
+    // set_tile_processor_clk_div(get_local_tile_id(), 12); // 600/12 = 50
+    // set_tile_processor_clk_div(get_local_tile_id(), 24); // 600/24 = 25
+    // set_tile_processor_clk_div(get_local_tile_id(), 600); // 600/600 = 1
+    rtos_printf("tile[%d] clock rate %d\n", THIS_XCORE_TILE, get_local_tile_processor_clock());
 #endif
 
     mem_analysis();
@@ -186,6 +220,25 @@ static void tile_common_init(chanend_t c)
                 NULL,
                 appconfSTARTUP_TASK_PRIORITY,
                 NULL);
+
+    rtos_printf("tile clock rate %d\n", get_local_tile_processor_clock());
+
+    unsigned pre_div = 0;
+    unsigned mul = 0;
+    unsigned post_div = 0;
+    get_node_pll_ratio(get_local_tile_id(), &pre_div, &mul, &post_div);
+    rtos_printf("pll ratios: pre %d mul %d post %d\n", pre_div, mul, post_div);
+
+    rtos_printf("proc clk div %d\n", get_tile_processor_clk_div(get_local_tile_id()));
+    enable_local_tile_processor_clock_divider();
+
+    rtos_printf("tile clock rate %d\n", get_local_tile_processor_clock());
+    set_tile_processor_clk_div(get_local_tile_id(), 1);
+    rtos_printf("proc clk div %d\n", get_tile_processor_clk_div(get_local_tile_id()));
+
+    rtos_printf("tile clock rate %d\n", get_local_tile_processor_clock());
+
+    rtos_printf("ref div %d\n",get_local_node_ref_clk_div());
 
     rtos_printf("start scheduler on tile %d\n", THIS_XCORE_TILE);
     vTaskStartScheduler();

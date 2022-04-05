@@ -47,6 +47,7 @@ target_compile_definitions(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
         MIC_ARRAY_CONFIG_PORT_MCLK=PORT_MCLK_IN
         MIC_ARRAY_CONFIG_PORT_PDM_CLK=PORT_PDM_CLK
         MIC_ARRAY_CONFIG_PORT_PDM_DATA=PORT_PDM_DATA
+        DEBUG_PRINT_ENABLE_RTOS_MIC_ARRAY=1
 )
 
 ## Create an alias
