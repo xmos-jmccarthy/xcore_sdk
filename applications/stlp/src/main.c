@@ -23,7 +23,7 @@
 #include "app_control/app_control.h"
 #include "usb_support.h"
 #include "usb_audio.h"
-#include "audio_pipeline/audio_pipeline.h"
+#include "audio_pipeline.h"
 #include "ww_model_runner/ww_model_runner.h"
 #include "fs_support.h"
 

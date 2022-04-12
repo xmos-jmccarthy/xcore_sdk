@@ -3,7 +3,7 @@
 #ifndef AEC_MEMORY_POOL_H
 #define AEC_MEMORY_POOL_H
 
-#include "audio_pipeline/aec/aec_config.h"
+#include "aec/aec_config.h"
 #include "xs3_math.h"
 
 //Memory pool definition

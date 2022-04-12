@@ -5,6 +5,7 @@ file(GLOB_RECURSE APP_SOURCES   src/*.c )
 set(APP_INCLUDES src src/vfe_pipeline src/usb src/ww_model_runner)
 
 add_subdirectory(bsp_config)
+add_subdirectory(audio_pipeline)
 
 #**********************
 # Flags
@@ -30,7 +31,7 @@ set(APP_COMPILE_DEFINITIONS
 
     CFG_TUSB_DEBUG_PRINTF=rtos_printf
     CFG_TUSB_DEBUG=0
-    
+
     appconfUSB_ENABLED=1
     appconfMIC_SRC_DEFAULT=appconfMIC_SRC_USB
     appconfAEC_REF_DEFAULT=appconfAEC_REF_USB
@@ -48,12 +49,7 @@ set(APP_COMMON_LINK_LIBRARIES
     sdk::rtos::usb_device_control
     sdk::rtos::audio_drivers
     sdk::lib_src
-    avona::adec
-    avona::aec
-    avona::agc
-    avona::ic
-    avona::ns
-    avona::vad
+    sdk::app::stlp::ap::fixeddelay
 )
 #**********************
 # Tile Targets
