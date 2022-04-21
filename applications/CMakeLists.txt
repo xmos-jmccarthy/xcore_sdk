@@ -1,7 +1,10 @@
 
 if(${CMAKE_SYSTEM_NAME} STREQUAL XCORE_XS3A)
-    add_subdirectory(ffd)
-    add_subdirectory(stlp)
+    include(applications/ffd/CMakeLists.txt)
+    include(applications/ffd/bsp_config/dac/CMakeLists.txt)
+    include(applications/ffd/bsp_config/XCORE-AI-EXPLORER/CMakeLists.txt)
+    include(applications/ffd/bsp_config/XK_VOICE_L71/CMakeLists.txt)
+    # add_subdirectory(applications/stlp/CMakeLists.txt)
 else()
     #add_subdirectory(stlp/host)
 endif()

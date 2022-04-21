@@ -3,11 +3,11 @@
 add_library(xcore_sdk_app_ffd_board_support_dac_aic3204 INTERFACE)
 target_sources(xcore_sdk_app_ffd_board_support_dac_aic3204
     INTERFACE
-        aic3204/aic3204.c
+        ${CMAKE_CURRENT_LIST_DIR}/aic3204/aic3204.c
 )
 target_include_directories(xcore_sdk_app_ffd_board_support_dac_aic3204
     INTERFACE
-        aic3204
+        ${CMAKE_CURRENT_LIST_DIR}/aic3204
 )
 target_compile_definitions(xcore_sdk_app_ffd_board_support_dac_aic3204
     INTERFACE
@@ -21,11 +21,11 @@ add_library(sdk::app::ffd::dac::aic3204 ALIAS xcore_sdk_app_ffd_board_support_da
 add_library(xcore_sdk_app_ffd_board_support_dac_dac3103 INTERFACE)
 target_sources(xcore_sdk_app_ffd_board_support_dac_dac3103
     INTERFACE
-        dac3101/dac3101.c
+        ${CMAKE_CURRENT_LIST_DIR}/dac3101/dac3101.c
 )
 target_include_directories(xcore_sdk_app_ffd_board_support_dac_dac3103
     INTERFACE
-        dac3101
+        ${CMAKE_CURRENT_LIST_DIR}/dac3101
 )
 target_compile_definitions(xcore_sdk_app_ffd_board_support_dac_dac3103
     INTERFACE

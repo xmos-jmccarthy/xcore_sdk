@@ -1,11 +1,12 @@
 #**********************
 # Gather Sources
 #**********************
-file(GLOB_RECURSE APP_SOURCES   src/*.c )
-set(APP_INCLUDES src src/usb)
+file(GLOB_RECURSE APP_SOURCES   ${CMAKE_CURRENT_LIST_DIR}/src/*.c )
+set(APP_INCLUDES ${CMAKE_CURRENT_LIST_DIR}/src ${CMAKE_CURRENT_LIST_DIR}/src/usb)
 
-add_subdirectory(bsp_config)
-add_subdirectory(inference_engines)
+# add_subdirectory(bsp_config)
+# add_subdirectory(inference_engines)
+include(${CMAKE_CURRENT_LIST_DIR}/inference_engines/CMakeLists.txt)
 
 #**********************
 # Flags
@@ -17,7 +18,7 @@ set(APP_COMPILER_FLAGS
     -fxscope
     -mcmodel=large
     -Wno-xcore-fptrgroup
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/config.xscope
+    ${CMAKE_CURRENT_LIST_DIR}/src/config.xscope
 )
 set(APP_COMPILE_DEFINITIONS
     DEBUG_PRINT_ENABLE=1
@@ -29,7 +30,7 @@ set(APP_COMPILE_DEFINITIONS
 
 set(APP_LINK_OPTIONS
     -report
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/config.xscope
+    ${CMAKE_CURRENT_LIST_DIR}/src/config.xscope
 )
 
 set(APP_COMMON_LINK_LIBRARIES
@@ -95,6 +96,10 @@ unset(TARGET_NAME)
 merge_binaries(application_ffd tile0_application_ffd tile1_application_ffd 1)
 merge_binaries(application_ffd_dev tile0_application_ffd_dev tile1_application_ffd_dev 1)
 
+get_source_file_property(AVAR /home/jmccarthy/xmos/xcore_sdk/modules/hil/lib_xud/lib_xud/lib_xud/src/core/XUD_Signalling.xc TARGET_DIRECTORY xcore_sdk_hil_lib_xud  COMPILE_OPTIONS)
+message(WARNING "properties are ${AVAR}")
+get_source_file_property(AVAR lib_xud/lib_xud/src/core/XUD_Signalling.xc TARGET_DIRECTORY xcore_sdk_hil_lib_xud COMPILE_OPTIONS)
+message(WARNING "properties are ${AVAR}")
 #**********************
 # Create run and debug targets
 #**********************

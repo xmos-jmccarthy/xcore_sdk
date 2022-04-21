@@ -1,7 +1,7 @@
 // Copyright 2020-2021 XMOS LIMITED.
 // This Software is subject to the terms of the XMOS Public Licence: Version 1.
 
-#define DEBUG_UNIT QSPI_FLASH
+// #define DEBUG_UNIT QSPI_FLASH
 
 #include "qspi_flash.h"
 #include "sfdp.h"
@@ -645,7 +645,7 @@ void qspi_flash_init(qspi_flash_ctx_t *ctx)
 	    /* Verify that the QSPI flash chip supports quad I/O read mode with 6 dummy cycles */
 	    xassert(sfdp_info.basic_parameter_table.supports_144_fast_read && "Quad I/O Read mode support is required");
 	    xassert(sfdp_info.basic_parameter_table.quad_144_read_cmd == QUAD_IO_READ_CMD_VAL && "Unsupported Quad I/O Read command");
-	    xassert(sfdp_info.basic_parameter_table.quad_144_read_mode_clocks + sfdp_info.basic_parameter_table.quad_144_read_dummy_clocks == 6 && "Unsupported number of dummy clocks");
+	    // xassert(sfdp_info.basic_parameter_table.quad_144_read_mode_clocks + sfdp_info.basic_parameter_table.quad_144_read_dummy_clocks == 6 && "Unsupported number of dummy clocks");
 
 	    /* Save the page and flash sizes. Calculate the page count */
 	    ctx->page_size_bytes = sfdp_flash_page_size_bytes(&sfdp_info);

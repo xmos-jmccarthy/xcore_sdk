@@ -3,15 +3,15 @@
 add_library(xcore_sdk_app_ffd_board_support_xk_voice_l71 INTERFACE)
 target_sources(xcore_sdk_app_ffd_board_support_xk_voice_l71
     INTERFACE
-        platform/dac_port.c
-        platform/app_pll_ctrl.c
-        platform/driver_instances.c
-        platform/platform_init.c
-        platform/platform_start.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/dac_port.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/app_pll_ctrl.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/driver_instances.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/platform_init.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/platform_start.c
 )
 target_include_directories(xcore_sdk_app_ffd_board_support_xk_voice_l71
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}
 )
 target_link_libraries(xcore_sdk_app_ffd_board_support_xk_voice_l71
     INTERFACE
@@ -22,11 +22,11 @@ target_link_libraries(xcore_sdk_app_ffd_board_support_xk_voice_l71
 )
 target_compile_options(xcore_sdk_app_ffd_board_support_xk_voice_l71
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/XK_VOICE_L71.xn
+        ${CMAKE_CURRENT_LIST_DIR}/XK_VOICE_L71.xn
 )
 target_link_options(xcore_sdk_app_ffd_board_support_xk_voice_l71
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/XK_VOICE_L71.xn
+        ${CMAKE_CURRENT_LIST_DIR}/XK_VOICE_L71.xn
 )
 target_compile_definitions(xcore_sdk_app_ffd_board_support_xk_voice_l71
     INTERFACE

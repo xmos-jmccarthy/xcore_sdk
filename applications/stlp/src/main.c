@@ -56,7 +56,7 @@ void audio_pipeline_input(void *input_app_data,
         }
     }
 
-    app_control_ap_handler(NULL, 0);
+    // app_control_ap_handler(NULL, 0);
 
     /*
      * NOTE: ALWAYS receive the next frame from the PDM mics,
@@ -161,7 +161,7 @@ int audio_pipeline_output(void *output_app_data,
     usb_audio_send(intertile_ctx,
                 frame_count,
                 output_audio_frames,
-                6);
+                ch_count);
 #endif
 
 #if appconfWW_ENABLED
@@ -275,12 +275,12 @@ void startup_task(void *arg)
 
     platform_start();
 
-#if ON_TILE(1)
+#if ON_TILE(0)
     gpio_test(gpio_ctx_t0);
 #endif
 
 #if ON_TILE(1)
-    app_control_ap_servicer_register();
+    // app_control_ap_servicer_register();
 #endif
     audio_pipeline_init(NULL, NULL);
 
@@ -311,8 +311,8 @@ static void tile_common_init(chanend_t c)
     platform_init(c);
     chanend_free(c);
 
-    ctrl_ret = app_control_init();
-    xassert(ctrl_ret == CONTROL_SUCCESS);
+    // ctrl_ret = app_control_init();
+    // xassert(ctrl_ret == CONTROL_SUCCESS);
 
 #if appconfUSB_ENABLED && ON_TILE(USB_TILE_NO)
     usb_audio_init(intertile_ctx, appconfUSB_AUDIO_TASK_PRIORITY);

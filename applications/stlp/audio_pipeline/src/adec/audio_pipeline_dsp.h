@@ -18,7 +18,8 @@ typedef struct {
     /* Below is additional context needed by other stages on a per frame basis */
     uint8_t vad;
     float_s32_t max_ref_energy;
-    float_s32_t aec_corr_factor;
+    float_s32_t aec_corr_factor[2];
+    int32_t ref_active_flag;
 } frame_data_t;
 
 typedef struct stage_delay_ctx {
@@ -49,18 +50,5 @@ typedef struct agc_stage_ctx {
     agc_meta_data_t md;
     agc_state_t DWORD_ALIGNED state;
 } agc_stage_ctx_t;
-
-/**
- * Delay buffer contains the configured buffer delay size + 1 frame worth of audio
- * When appconfINPUT_SAMPLES_MIC_DELAY_MS  is positive, the mic is delayed
- * When appconfINPUT_SAMPLES_MIC_DELAY_MS is negative, the mic is "advanced" by delaying ref
- */
-#define ABS(A) ((A >= 0) ? A : -A)
-#define AP_INPUT_SAMPLES_MIC_DELAY_SIZE_PER_CHAN        ( 16000*ABS(appconfINPUT_SAMPLES_MIC_DELAY_MS)/1000 )
-#define AP_INPUT_SAMPLES_MIC_DELAY_CHAN_CNT             ( (appconfINPUT_SAMPLES_MIC_DELAY_MS > 0) ? AEC_MAX_Y_CHANNELS : AEC_MAX_X_CHANNELS )
-#define AP_INPUT_SAMPLES_MIC_DELAY_SIZE_CHAN            ( AP_INPUT_SAMPLES_MIC_DELAY_SIZE_PER_CHAN * AP_INPUT_SAMPLES_MIC_DELAY_CHAN_CNT )
-#define AP_INPUT_SAMPLES_MIC_DELAY_SIZE_CUR_FRAME_WORDS ( AP_INPUT_SAMPLES_MIC_DELAY_CHAN_CNT * appconfAUDIO_PIPELINE_FRAME_ADVANCE)
-#define AP_INPUT_SAMPLES_MIC_DELAY_CUR_FRAME_BYTES      ( AP_INPUT_SAMPLES_MIC_DELAY_SIZE_CUR_FRAME_WORDS * sizeof(int32_t))
-#define AP_INPUT_SAMPLES_MIC_DELAY_BUF_SIZE_BYTES       ( AP_INPUT_SAMPLES_MIC_DELAY_SIZE_CHAN * sizeof(int32_t) )
 
 #endif /* AUDIO_PIPELINE_DSP_H_ */

@@ -42,7 +42,7 @@
 #endif
 
 #ifndef appconfUSB_ENABLED
-#define appconfUSB_ENABLED   0
+#define appconfUSB_ENABLED   1
 #endif
 
 #ifndef appconfUSB_AUDIO_SAMPLE_RATE

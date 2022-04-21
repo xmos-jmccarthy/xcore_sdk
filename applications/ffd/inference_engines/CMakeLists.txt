@@ -2,14 +2,14 @@
 add_library(xcore_sdk_app_ffd_inference_engine_template INTERFACE)
 target_sources(xcore_sdk_app_ffd_inference_engine_template
     INTERFACE
-        template/template_inf_eng.c
-        template/template_inf_eng_port.c
-        template/template_inf_eng_support.c
+        ${CMAKE_CURRENT_LIST_DIR}/template/template_inf_eng.c
+        ${CMAKE_CURRENT_LIST_DIR}/template/template_inf_eng_port.c
+        ${CMAKE_CURRENT_LIST_DIR}/template/template_inf_eng_support.c
 )
 target_include_directories(xcore_sdk_app_ffd_inference_engine_template
     INTERFACE
-        api
-        template
+        ${CMAKE_CURRENT_LIST_DIR}/api
+        ${CMAKE_CURRENT_LIST_DIR}/template
 )
 target_link_libraries(xcore_sdk_app_ffd_inference_engine_template
     INTERFACE
@@ -25,14 +25,14 @@ add_library(sdk::app::inference_engine::template ALIAS xcore_sdk_app_ffd_inferen
 add_library(xcore_sdk_app_ffd_inference_engine_keyword INTERFACE)
 target_sources(xcore_sdk_app_ffd_inference_engine_keyword
     INTERFACE
-        keyword/keyword_inf_eng.c
-        keyword/keyword_inf_eng_port.c
-        keyword/keyword_inf_eng_support.c
+        ${CMAKE_CURRENT_LIST_DIR}/keyword/keyword_inf_eng.c
+        ${CMAKE_CURRENT_LIST_DIR}/keyword/keyword_inf_eng_port.c
+        ${CMAKE_CURRENT_LIST_DIR}/keyword/keyword_inf_eng_support.c
 )
 target_include_directories(xcore_sdk_app_ffd_inference_engine_keyword
     INTERFACE
-        api
-        keyword
+        ${CMAKE_CURRENT_LIST_DIR}/api
+        ${CMAKE_CURRENT_LIST_DIR}/keyword
 )
 target_link_libraries(xcore_sdk_app_ffd_inference_engine_keyword
     INTERFACE

@@ -13,7 +13,7 @@ if((${CMAKE_SYSTEM_NAME} STREQUAL XCORE_XS3A) OR (${CMAKE_SYSTEM_NAME} STREQUAL 
     set(XCORE_XS3A_SOURCES ${LIB_ASM_SOURCES})
 
     ## Set any local library compile options
-    set(LIB_COMPILE_FLAGS "-O2")
+    set(LIB_COMPILE_FLAGS "-O2" "-DQSPI_FLASH_SANITY_CHECKS=1")
 
     ## Includes files
     set(LIB_PUBLIC_INCLUDES  api)
@@ -30,22 +30,26 @@ if((${CMAKE_SYSTEM_NAME} STREQUAL XCORE_XS3A) OR (${CMAKE_SYSTEM_NAME} STREQUAL 
     add_library(xcore_sdk_hil_lib_qspi_io STATIC)
     target_sources(xcore_sdk_hil_lib_qspi_io
         PUBLIC
+        # INTERFACE
             ${LIB_PUBLIC_SOURCES}
         PRIVATE
             ${LIB_PRIVATE_SOURCES}
     )
     target_include_directories(xcore_sdk_hil_lib_qspi_io
         PUBLIC
+        # INTERFACE
             ${LIB_PUBLIC_INCLUDES}
         PRIVATE
             ${LIB_PRIVATE_INCLUDES}
     )
     target_compile_options(xcore_sdk_hil_lib_qspi_io
-        PRIVATE
+        PUBLIC
+        # INTERFACE
             ${LIB_COMPILE_FLAGS}
     )
     target_link_libraries(xcore_sdk_hil_lib_qspi_io
         PUBLIC
+        # INTERFACE
             sdk::utils
     )
 

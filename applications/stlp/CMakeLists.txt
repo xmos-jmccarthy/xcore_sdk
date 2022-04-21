@@ -17,6 +17,8 @@ set(APP_COMPILER_FLAGS
     -fxscope
     -mcmodel=large
     -Wno-xcore-fptrgroup
+    -MD
+    -MMD
     ${CMAKE_CURRENT_SOURCE_DIR}/src/config.xscope
 )
 
@@ -32,9 +34,9 @@ set(APP_COMPILE_DEFINITIONS
     CFG_TUSB_DEBUG_PRINTF=rtos_printf
     CFG_TUSB_DEBUG=0
 
-    appconfUSB_ENABLED=1
-    appconfMIC_SRC_DEFAULT=appconfMIC_SRC_USB
-    appconfAEC_REF_DEFAULT=appconfAEC_REF_USB
+    # appconfUSB_ENABLED=1
+    # appconfMIC_SRC_DEFAULT=appconfMIC_SRC_USB
+    # appconfAEC_REF_DEFAULT=appconfAEC_REF_USB
 )
 
 set(APP_LINK_OPTIONS
@@ -49,7 +51,9 @@ set(APP_COMMON_LINK_LIBRARIES
     sdk::rtos::usb_device_control
     sdk::rtos::audio_drivers
     sdk::lib_src
-    sdk::app::stlp::ap::fixeddelay
+    # sdk::app::stlp::ap::fixeddelay
+    sdk::app::stlp::ap::adec
+    # sdk::app::stlp::ap::dummy
 )
 #**********************
 # Tile Targets

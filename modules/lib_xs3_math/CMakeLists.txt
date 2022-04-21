@@ -49,17 +49,15 @@ add_library(xcore_sdk_lib_xs3_math STATIC)
 target_sources(xcore_sdk_lib_xs3_math
     PUBLIC
         ${LIB_PUBLIC_SOURCES}
-    PRIVATE
         ${LIB_PRIVATE_SOURCES}
 )
 target_include_directories(xcore_sdk_lib_xs3_math
     PUBLIC
         ${LIB_PUBLIC_INCLUDES}
-    PRIVATE
         ${LIB_PRIVATE_INCLUDES}
 )
 target_compile_options(xcore_sdk_lib_xs3_math
-    PRIVATE
+    PUBLIC
         ${LIB_COMPILE_FLAGS}
 )
 target_link_libraries(xcore_sdk_lib_xs3_math

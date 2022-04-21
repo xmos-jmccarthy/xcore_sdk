@@ -112,7 +112,7 @@ static void stage_agc(frame_data_t *frame_data)
 
     agc_stage_state.md.vad_flag = (frame_data->vad > AGC_VAD_THRESHOLD);
     agc_stage_state.md.aec_ref_power = frame_data->max_ref_energy;
-    agc_stage_state.md.aec_corr_factor = frame_data->aec_corr_factor;
+    agc_stage_state.md.aec_corr_factor = frame_data->aec_corr_factor[0];
 
     agc_process_frame(
             &agc_stage_state.state,

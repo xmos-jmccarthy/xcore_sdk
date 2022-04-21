@@ -1,7 +1,7 @@
 // Copyright 2020-2021 XMOS LIMITED.
 // This Software is subject to the terms of the XMOS Public Licence: Version 1.
 
-#define DEBUG_UNIT RTOS_QSPI_FLASH
+// #define DEBUG_UNIT RTOS_QSPI_FLASH
 
 #include <string.h>
 

@@ -3,15 +3,15 @@
 add_library(xcore_sdk_app_ffd_board_support_xcore_ai_explorer INTERFACE)
 target_sources(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
     INTERFACE
-        platform/dac_port.c
-        platform/app_pll_ctrl.c
-        platform/driver_instances.c
-        platform/platform_init.c
-        platform/platform_start.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/dac_port.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/app_pll_ctrl.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/driver_instances.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/platform_init.c
+        ${CMAKE_CURRENT_LIST_DIR}/platform/platform_start.c
 )
 target_include_directories(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}
 )
 target_link_libraries(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
     INTERFACE
@@ -22,11 +22,11 @@ target_link_libraries(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
 )
 target_compile_options(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/XCORE-AI-EXPLORER.xn
+        ${CMAKE_CURRENT_LIST_DIR}/XCORE-AI-EXPLORER.xn
 )
 target_link_options(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
     INTERFACE
-        ${CMAKE_CURRENT_SOURCE_DIR}/XCORE-AI-EXPLORER.xn
+        ${CMAKE_CURRENT_LIST_DIR}/XCORE-AI-EXPLORER.xn
 )
 target_compile_definitions(xcore_sdk_app_ffd_board_support_xcore_ai_explorer
     INTERFACE
