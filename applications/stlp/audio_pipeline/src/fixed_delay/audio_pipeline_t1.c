@@ -35,7 +35,6 @@
 #endif
 
 #if ON_TILE(1)
-
 #if appconfINPUT_SAMPLES_MIC_DELAY_MS != 0
 static stage_delay_ctx_t delay_buf_state = {};
 #endif

@@ -20,8 +20,6 @@
 #include "ic_api.h"
 #include "ns_api.h"
 #include "vad_api.h"
-#include "aec/aec_config.h"
-#include "aec/aec_memory_pool.h"
 #include "adec_api.h"
 
 /* App headers */

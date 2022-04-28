@@ -167,7 +167,7 @@ int audio_pipeline_output(void *output_app_data,
 #if appconfWW_ENABLED
     ww_audio_send(intertile_ctx,
                   frame_count,
-                  output_audio_frames);
+                  (int32_t(*)[2])output_audio_frames);
 #endif
 
     return AUDIO_PIPELINE_FREE_FRAME;
