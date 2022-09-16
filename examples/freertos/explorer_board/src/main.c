@@ -55,7 +55,7 @@ void startup_task(void *arg)
     example_pipeline_init(appconfAUDIO_PIPELINE_TASK_PRIORITY);
 
     /* Create uart demo tasks and receivers */
-    uart_demo_create(appconfFILESYSTEM_DEMO_TASK_PRIORITY);
+    // uart_demo_create(appconfFILESYSTEM_DEMO_TASK_PRIORITY);
 #endif
 
 	for (;;) {
