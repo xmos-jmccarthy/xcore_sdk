@@ -16,11 +16,6 @@ static const char* test_name = "check_params_test";
 
 #define local_printf( FMT, ... )    qspi_flash_printf("%s|" FMT, test_name, ##__VA_ARGS__)
 
-#define QSPI_FLASH_FLASH_PART_SIZE          8388608
-#define QSPI_FLASH_FLASH_PART_PAGE_SIZE     256
-#define QSPI_FLASH_FLASH_PART_PAGE_CNT      32768
-#define QSPI_FLASH_FLASH_SECTOR_SIZE        4096
-
 QSPI_FLASH_MAIN_TEST_ATTR
 static int main_test(qspi_flash_test_ctx_t *ctx)
 {
@@ -31,33 +26,33 @@ static int main_test(qspi_flash_test_ctx_t *ctx)
     size_t page_cnt = rtos_qspi_flash_page_count_get(ctx->qspi_flash_ctx);
     size_t sector_size = rtos_qspi_flash_sector_size_get(ctx->qspi_flash_ctx);
 
-    if (flash_size != QSPI_FLASH_FLASH_PART_SIZE)
+    if (flash_size == 0)    /* Explorer boards have various flash parts, so just check that a non zero value is here for now */
     {
-        local_printf("Failed flash part size incorrect.  Got %u expected %u", flash_size, QSPI_FLASH_FLASH_PART_SIZE);
+        local_printf("Failed flash part size incorrect.  Got %u expected != %u", flash_size, 0);
         return -1;
     } else {
         local_printf("Flash part size correct");
     }
 
-    if (page_size != QSPI_FLASH_FLASH_PART_PAGE_SIZE)
+    if (page_size != 256)
     {
-        local_printf("Failed flash part page size incorrect.  Got %u expected %u", page_size, QSPI_FLASH_FLASH_PART_PAGE_SIZE);
+        local_printf("Failed flash part page size incorrect.  Got %u expected %u", page_size, 256);
         return -1;
     } else {
         local_printf("Flash part page size correct");
     }
 
-    if (page_cnt != QSPI_FLASH_FLASH_PART_PAGE_CNT)
+    if (page_cnt == 0)      /* Explorer boards have various flash parts, so just check that a non zero value is here for now */
     {
-        local_printf("Failed flash part count incorrect.  Got %u expected %u", page_cnt, QSPI_FLASH_FLASH_PART_PAGE_CNT);
+        local_printf("Failed flash part count incorrect.  Got %u expected != %u", page_cnt, 0);
         return -1;
     } else {
         local_printf("Flash part page count correct");
     }
 
-    if (sector_size != QSPI_FLASH_FLASH_SECTOR_SIZE)
+    if (sector_size != 4096)
     {
-        local_printf("Failed flash part sector size incorrect.  Got %u expected %u", sector_size, QSPI_FLASH_FLASH_SECTOR_SIZE);
+        local_printf("Failed flash part sector size incorrect.  Got %u expected %u", sector_size, 4096);
         return -1;
     } else {
         local_printf("Flash part sector size correct");
