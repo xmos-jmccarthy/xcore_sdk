@@ -67,7 +67,7 @@ static void test_nonsequential_read(uint32_t cnt) {
     rtos_printf("Non Sequential read:\n");
     start = hwtimer_get_time(tmr);
     for(int i=0; i<cnt; i++) {
-        rtos_qspi_flash_read(qspi_flash_ctx, buf, 0, 1);
+        rtos_qspi_flash_read(qspi_flash_ctx, buf, 0, 2);
     }
     end = hwtimer_get_time(tmr);
     print_info(start, end, cnt);
@@ -159,7 +159,7 @@ void startup_task(void *arg)
     test_nonsequential_read(1000);
     test_sequential_write(1000);
     test_nonsequential_write(1000);
-    test_large_erase(100);
+    test_large_erase(20000);
     test_small_erase(100);
 #endif
 
